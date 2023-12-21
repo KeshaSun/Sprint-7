@@ -1,17 +1,12 @@
 package edu.praktikum.sprint7.courier.order;
 
 import edu.praktikum.sprint7.models.Order;
-
-import java.util.Random;
-
 import static edu.praktikum.sprint7.utils.Utils.*;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 
 public class OrderGenerator {
-    private static edu.praktikum.sprint7.utils.Utils Utils;
-
-    public static Order randomScooterOrder(){
+    public static Order randomOrder(){
         return new Order()
                 .withFirstName(randomAlphabetic(5))
                 .withLastName(randomAlphabetic(5))
