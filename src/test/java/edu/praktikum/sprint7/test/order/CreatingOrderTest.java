@@ -1,6 +1,6 @@
 package edu.praktikum.sprint7.test.order;
 
-import edu.praktikum.sprint7.courier.order.OrderClient;
+import edu.praktikum.sprint7.order.OrderClient;
 import edu.praktikum.sprint7.models.Order;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
@@ -11,9 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import static edu.praktikum.sprint7.courier.order.OrderGenerator.randomOrder;
+import static edu.praktikum.sprint7.order.OrderGenerator.randomOrder;
 import static org.apache.http.HttpStatus.SC_CREATED;
-import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)

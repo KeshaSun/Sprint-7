@@ -1,4 +1,4 @@
-package edu.praktikum.sprint7.courier.order;
+package edu.praktikum.sprint7.order;
 
 import edu.praktikum.sprint7.courier.CourierClient;
 import edu.praktikum.sprint7.models.Courier;

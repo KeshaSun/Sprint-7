@@ -1,7 +1,7 @@
 package edu.praktikum.sprint7.test.order;
 
 import edu.praktikum.sprint7.courier.CourierClient;
-import edu.praktikum.sprint7.courier.order.OrderClient;
+import edu.praktikum.sprint7.order.OrderClient;
 import edu.praktikum.sprint7.models.Courier;
 import edu.praktikum.sprint7.models.Order;
 import io.qameta.allure.junit4.DisplayName;
@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.junit.After;
 
 import static edu.praktikum.sprint7.courier.CourierGenerator.randomCourier;
-import static edu.praktikum.sprint7.courier.order.OrderGenerator.randomOrder;
+import static edu.praktikum.sprint7.order.OrderGenerator.randomOrder;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;

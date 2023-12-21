@@ -1,4 +1,4 @@
-package edu.praktikum.sprint7.courier.order;
+package edu.praktikum.sprint7.order;
 
 import edu.praktikum.sprint7.models.Order;
 import static edu.praktikum.sprint7.utils.Utils.*;
