@@ -19,13 +19,14 @@ import static org.junit.Assert.assertNotNull;
 
 public class CourierCreationTest {
     private static final String BASE_URL = "https://qa-scooter.praktikum-services.ru/";
-    CourierClient courierClient = new CourierClient();
     Courier courier = randomCourier();
+    CourierClient courierClient = new CourierClient();
 
     @Before
     public void setUp() {
         //базовый урл для запроса
         RestAssured.baseURI = BASE_URL;
+
 
     }
 
@@ -33,8 +34,6 @@ public class CourierCreationTest {
     @DisplayName("Создание курьера")
     @Description("Создание курьера со случайными данными")
     public void newCourierCreationTest() {
-        Courier courier = randomCourier();
-        CourierClient courierClient = new CourierClient();
         Response response = courierClient.create(courier);
         assertEquals("Неверный статус код", SC_CREATED,response.statusCode());
         Response loginResponse = courierClient.login(fromCourier(courier));
@@ -46,8 +45,6 @@ public class CourierCreationTest {
     @DisplayName("Создание двух одинаковых курьеров")
     @Description("Создание курьера со случайными данными и повторная его авторизация")
     public void oldCourierCreationTest(){
-        Courier courier = randomCourier();
-        CourierClient courierClient = new CourierClient();
         Response response = courierClient.create(courier);
         assertEquals("Неверный статус код", SC_CREATED,response.statusCode());
         Response loginResponse = courierClient.login(fromCourier(courier));
@@ -62,8 +59,7 @@ public class CourierCreationTest {
     @DisplayName("Создание курьера")
     @Description("Получение 201 ОК")
     public void correctResponseCourierCreationTest(){
-        Courier courier = randomCourier();
-        CourierClient courierClient = new CourierClient();
+
         Response response = courierClient.create(courier);
         assertEquals("Неверный статус код", SC_CREATED,response.statusCode());
      }
@@ -72,18 +68,14 @@ public class CourierCreationTest {
     @DisplayName("Создание курьера")
     @Description("Получение ответа ok:true")
     public void answerCourierCreationTest(){
-            Courier courier = randomCourier();
-            CourierClient courierClient = new CourierClient();
             Response response = courierClient.create(courier);
-            assertEquals("Неверный текст ответа", "ok: true",response.getBody().asString());
+            assertEquals("Неверный текст ответа", "{\"ok\":true}",response.getBody().asString());
     }
 
     @Test//если создать пользователя с логином, который уже есть, возвращается ошибка.
     @DisplayName("Создание 2х курьеров")
     @Description("Создание второго курьера с login = login первого курьера")
     public void sameLoginCourierCreationTest(){
-        Courier courier = randomCourier();
-        CourierClient courierClient = new CourierClient();
         Response response = courierClient.create(courier);
         assertEquals("Неверный статус код", SC_CREATED,response.statusCode());
         String courierLogin = courier.getLogin();

@@ -38,12 +38,12 @@ public class Courier {
                 '}';
     }
 
-    public static void setLogin(String courierLogin) {
+    public static void setLogin(String login) {
     }
 
     public static void setPassword(String password) {
     }
 
-    public void setFirstName(String firstName) {
+    public static void setFirstName(String firstName) {
     }
 }

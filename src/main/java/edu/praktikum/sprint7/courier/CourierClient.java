@@ -15,6 +15,7 @@ public class CourierClient {
     @Step("Создание курьера {courier}")
     public Response create(Courier courier){
         return given()
+                .log().all()
                 .header("Content-type", "application/json")
                 .and()
                 .body(courier)
@@ -34,6 +35,7 @@ public class CourierClient {
     @Step("Авторизация курьером {courierCred}")
     public Response login(CourierCred courierCred){
         return given()
+                .log().all()
                 .header("Content-type", "application/json")
                 .and()
                 .body(courierCred)
@@ -41,9 +43,9 @@ public class CourierClient {
                 .post(COURIER_LOGIN_URL);
     }
     @Step("Send DELETE request to /api/v1/courier/:id - удаление курьера")
-    public Response remove(Courier courier){
+    public void remove(Courier courier){
         String id = getIdCourier(courier);
-        return given()
+        given()
                 .header("Content-type", "application/json")
                 .and()
                 .pathParam("id", id)

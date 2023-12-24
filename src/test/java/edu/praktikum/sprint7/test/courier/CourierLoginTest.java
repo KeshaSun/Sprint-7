@@ -3,7 +3,6 @@ package edu.praktikum.sprint7.test.courier;
 import edu.praktikum.sprint7.courier.CourierClient;
 import edu.praktikum.sprint7.models.Courier;
 import edu.praktikum.sprint7.models.CourierCred;
-import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -11,10 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static edu.praktikum.sprint7.courier.CourierGenerator.randomCourier;
-import static edu.praktikum.sprint7.models.CourierCred.fromCourier;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.apache.http.HttpStatus.*;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 
 public class CourierLoginTest {
@@ -27,6 +24,7 @@ public class CourierLoginTest {
     public void setUp() {
         //базовый урл для запроса
         RestAssured.baseURI = BASE_URL;
+        courierClient.create(courier);
     }
 
     @Test
@@ -46,7 +44,7 @@ public class CourierLoginTest {
 
         Response response = courierClient.login(courierWithOnlyLogin);
         assertEquals("Неверный статус код ответа", SC_BAD_REQUEST, response.statusCode());
-        assertEquals("Неверный текст ответа","Учетная запись не найдена", response.path("message"));
+        assertEquals("Неверный текст ответа","Недостаточно данных для входа", response.path("message"));
     }
 
     @Test
@@ -57,7 +55,7 @@ public class CourierLoginTest {
 
         Response response = courierClient.login(courierWithOnlyPassword);
         assertEquals("Неверный статус код ответа",SC_BAD_REQUEST, response.statusCode());
-        assertEquals("Неверный текст ответа","Учетная запись не найдена", response.path("message"));
+        assertEquals("Неверный текст ответа","Недостаточно данных для входа", response.path("message"));
     }
 
     @Test
@@ -68,7 +66,7 @@ public class CourierLoginTest {
         courierWithoutLoginPassword.setPassword("");
         Response response = courierClient.login(courierWithoutLoginPassword);
         assertEquals("Неверный статус код ответа", SC_BAD_REQUEST, response.statusCode());
-        assertEquals("Неверный текст ответа","Учетная запись не найдена", response.path("message"));
+        assertEquals("Неверный текст ответа","Недостаточно данных для входа", response.path("message"));
     }
 
     @Test

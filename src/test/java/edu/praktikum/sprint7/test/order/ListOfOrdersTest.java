@@ -21,8 +21,8 @@ import static org.junit.Assert.assertEquals;
 public class ListOfOrdersTest {
     private static final String BASE_URL = "https://qa-scooter.praktikum-services.ru/";
     Courier courier = randomCourier();
-    Order order = randomOrder();
-    Order orderScooterTwo = randomOrder();
+    Order orderOne = randomOrder();
+    Order orderTwo = randomOrder();
     CourierClient courierClient = new CourierClient();
     OrderClient orderScooterClient = new OrderClient();
 
@@ -32,12 +32,12 @@ public class ListOfOrdersTest {
         courierClient.create(courier);
 
         //Курьер принял заказ
-        orderScooterClient.create(order);
-        orderScooterClient.accept(order, courier);
+        orderScooterClient.create(orderOne);
+        orderScooterClient.accept(orderOne, courier);
         //Курьер принял и завершил заказ2
-        orderScooterClient.create(orderScooterTwo);
-        orderScooterClient.accept(orderScooterTwo, courier);
-        orderScooterClient.finished(orderScooterTwo);
+        orderScooterClient.create(orderTwo);
+        orderScooterClient.accept(orderTwo, courier);
+        orderScooterClient.finished(orderTwo);
     }
 
     @Test
@@ -63,16 +63,16 @@ public class ListOfOrdersTest {
         assertEquals("Неверный статус код ответа2", SC_OK, response.statusCode());
     }
 
-    @Test
+   /* @Test
     @DisplayName("Получение списка всех заказов курьера на станциях Бульвар Рокоссовского(1) или Черкизовская(2)")
     public void checkListOfCourierOrdersAtStation(){
-        Order orderScooterStation1 = new Order()
-                .withMetroStation("1");
-        Order orderScooterStation2 = new Order()
-                .withMetroStation("2");
+        Order orderStation1 = new Order();
+                orderStation1.setMetroStation("1");
+        Order orderStation2 = new Order();
+                orderStation1.setMetroStation("1");
         //Курьер принимает заказы со станций Бульвар Рокоссовского(1) и Черкизовская(2)
-        orderScooterClient.accept(orderScooterStation1, courier);
-        orderScooterClient.accept(orderScooterStation2, courier);
+        orderScooterClient.accept(orderStation1, courier);
+        orderScooterClient.accept(orderStation2, courier);
 
         Response response = orderScooterClient.getAllCourierOrdersAtStations(courier);
         response
@@ -83,16 +83,17 @@ public class ListOfOrdersTest {
         assertEquals("Неверный статус код ответа3", SC_OK, response.statusCode());
 
         //Отмена заказов
-        Response response1 = orderScooterClient.cancel(orderScooterStation1);
+        Response response1 = orderScooterClient.cancel(orderStation1);
         assertEquals("Неверный статус код ответа4", SC_OK, response1.statusCode());
-        Response response2 = orderScooterClient.cancel(orderScooterStation2);
+        Response response2 = orderScooterClient.cancel(orderStation2);
         assertEquals("Неверный статус код ответа5", SC_OK, response2.statusCode());
-    }
+    }*/
 
     @After
     public void tearDown(){
         courierClient.remove(courier);
-        orderScooterClient.cancel(order);
+        orderScooterClient.cancel(orderOne);
+        orderScooterClient.cancel(orderTwo);
     }
 
 

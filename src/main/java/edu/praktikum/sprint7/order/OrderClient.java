@@ -21,6 +21,7 @@ public class OrderClient {
         @Step("Создать заказ")
         public Response create(Order order) {
             return given()
+                    .log().all()
                     .header("Content-type", "application/json")
                     .body(order)
                     .and()
